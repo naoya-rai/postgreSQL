@@ -1,0 +1,30 @@
+SELECT COUNT(shiire_tanka)
+ FROM Shohin;
+
+-------------------------------------------------------------------------
+SELECT SUM(hanbai_tanka)
+ FROM Shohin;
+
+-------------------------------------------------------------------------
+SELECT SUM(hanbai_tanka), SUM(shiire_tanka)
+ FROM Shohin;
+
+-------------------------------------------------------------------------
+SELECT AVG(hanbai_tanka)
+ FROM Shohin;
+
+-------------------------------------------------------------------------
+SELECT AVG(hanbai_tanka), AVG(shiire_tanka)
+ FROM Shohin;
+
+-------------------------------------------------------------------------
+SELECT MAX(hanbai_tanka), MIN(shiire_tanka)
+ FROM Shohin;
+
+-------------------------------------------------------------------------
+SELECT COUNT(DISTINCT shohin_bunrui)
+ FROM Shohin;
+
+
+
+
