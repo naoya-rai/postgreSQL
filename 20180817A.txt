@@ -1,0 +1,121 @@
+shop=# SELECT shohin_bunrui, COUNT(*)
+shop-#  FROM Shohin
+shop-# GROUP BY shohin_bunrui;
+ shohin_bunrui | count
+---------------+-------
+ キッチン用品  |     4
+ 衣服          |     2
+ 事務用品      |     2
+(3 行)
+
+-----------------------------------------------------------------------------------
+shop=# SELECT shiire_tanka, COUNT(*)
+shop-#  FROM Shohin
+shop-# GROUP BY shiire_tanka;
+ shiire_tanka | count
+--------------+-------
+              |     2
+          320 |     1
+          500 |     1
+         2800 |     2
+         5000 |     1
+          790 |     1
+(6 行)
+
+nullが含まれる場合はすべてnullというグループになる。
+-----------------------------------------------------------------------------------
+shop=# SELECT shiire_tanka, COUNT(*)
+shop-#  FROM Shohin
+shop-# WHERE shohin_bunrui = '衣服'
+shop-# GROUP BY shiire_tanka;
+ shiire_tanka | count
+--------------+-------
+          500 |     1
+         2800 |     1
+(2 行)
+
+-----------------------------------------------------------------------------------
+shop=# SELECT DISTINCT shohin_bunrui
+shop-#  FROM Shohin;
+ shohin_bunrui
+---------------
+ キッチン用品
+ 衣服
+ 事務用品
+(3 行)
+
+
+
+shop=# SELECT shohin_bunrui
+shop-#  FROM Shohin
+shop-# GROUP BY shohin_bunrui;
+ shohin_bunrui
+---------------
+ キッチン用品
+ 衣服
+ 事務用品
+(3 行)
+
+-----------------------------------------------------------------------------------
+shop=# SELECT shohin_bunrui, COUNT(*)
+shop-#  FROM Shohin
+shop-# GROUP BY shohin_bunrui;
+ shohin_bunrui | count
+---------------+-------
+ キッチン用品  |     4
+ 衣服          |     2
+ 事務用品      |     2
+(3 行)
+
+
+shop=# SELECT shohin_bunrui, COUNT(*)
+shop-#  FROM Shohin
+shop-# GROUP BY shohin_bunrui
+shop-# HAVING COUNT(*) = 2;
+ shohin_bunrui | count
+---------------+-------
+ 衣服          |     2
+ 事務用品      |     2
+(2 行)
+
+-----------------------------------------------------------------------------------
+shop=# SELECT shohin_bunrui, AVG(hanbai_tanka)
+shop-#  FROM Shohin
+shop-# GROUP BY shohin_bunrui;
+ shohin_bunrui |          avg
+---------------+-----------------------
+ キッチン用品  | 2795.0000000000000000
+ 衣服          | 2500.0000000000000000
+ 事務用品      |  300.0000000000000000
+(3 行)
+
+
+
+shop=# SELECT shohin_bunrui, AVG(hanbai_tanka)
+shop-#  FROM Shohin
+shop-# GROUP BY shohin_bunrui
+shop-# HAVING AVG(hanbai_tanka) >= 2500;
+ shohin_bunrui |          avg
+---------------+-----------------------
+ キッチン用品  | 2795.0000000000000000
+ 衣服          | 2500.0000000000000000
+(2 行)
+
+-----------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

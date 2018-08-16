@@ -1,0 +1,66 @@
+SELECT shohin_bunrui, COUNT(*)
+ FROM Shohin
+GROUP BY shohin_bunrui;
+
+商品分類ごとの商品数を数える。
+
+-------------------------------------------------------------------------
+SELECT shiire_tanka, COUNT(*)
+ FROM Shohin
+GROUP BY shiire_tanka;
+
+仕入単価をキーとしてテーブルをカットする。
+nullが含まれる場合はすべてnullというグループになる。
+
+-------------------------------------------------------------------------
+SELECT shiire_tanka, COUNT(*)
+ FROM Shohin
+WHERE shohin_bunrui = '衣服'
+GROUP BY shiire_tanka;
+
+商品分類が衣服の仕入単価を表示する。
+
+-------------------------------------------------------------------------
+SELECT DISTINCT shohin_bunrui
+ FROM Shohin;
+
+SELECT shohin_bunrui
+ FROM Shohin
+GROUP BY shohin_bunrui;
+
+重複列を排除する同じかきかた。
+
+-------------------------------------------------------------------------
+SELECT shohin_bunrui, COUNT(*)
+ FROM Shohin
+GROUP BY shohin_bunrui;
+
+
+SELECT shohin_bunrui, COUNT(*)
+ FROM Shohin
+GROUP BY shohin_bunrui
+HAVING COUNT(*) = 2;
+
+商品分類で集約したものに対して
+含まれる行数が2行のもの、に絞った、制限した。
+
+-------------------------------------------------------------------------
+SELECT shohin_bunrui, AVG(hanbai_tanka)
+ FROM Shohin
+GROUP BY shohin_bunrui;
+
+商品分類の平均単価でグループ化する。
+
+SELECT shohin_bunrui, AVG(hanbai_tanka)
+ FROM Shohin
+GROUP BY shohin_bunrui
+HAVING AVG(hanbai_tanka) >= 2500;
+
+商品分類の平均単価でグループ化する、更に条件に平均単価2500円以上を加えた。
+
+-------------------------------------------------------------------------
+
+
+
+
+
