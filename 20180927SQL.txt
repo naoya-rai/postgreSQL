@@ -1,0 +1,69 @@
+CREATE VIEW ShohinSum(shohin_bunrui,cnt_shohin)
+AS
+SELECT shohin_bunrui,COUNT(*)
+FROM Shohin
+GROUP BY Shohin_bunrui;
+
+①ビューの列名
+②ビュー定義の本体（中身はただのSELECT文）
+商品分類ごとに商品数を集計するビュー
+
+-------------------------------------------------------------------------
+SELECT shohin_bunrui,cnt_shohin
+FROM ShohinSum;
+
+FROM句にテーブルの代わりにビューを指定する。
+
+-------------------------------------------------------------------------
+CREATE VIEW ShohinSumJim(shohin_bunrui,cnt_shohin)
+AS
+SELECT shohin_bunrui,cnt_shohin
+FROM ShohinSum
+WHERE shohin_bunrui = '事務用品';
+
+ビューからビューを作る
+-------------------------------------------------------------------------
+SELECT shohin_bunrui,cnt_shohin
+FROM ShohinSumJim;
+
+ビューが作成されていることの確認
+
+-------------------------------------------------------------------------
+DROP VIEW ShohinSum;
+
+ビューの削除
+
+-------------------------------------------------------------------------
+DROP VIEW ShohinSum CASCADE;
+
+依存するビューごと削除する。
+
+-------------------------------------------------------------------------
+SELECT shohin_bunrui,cnt_shohin
+FROM
+ (SELECT shohin_bunrui,COUNT(*) AS cnt_shohin
+ FROM ShohinSum
+GROUP BY shohin_bunrui) AS ShohinSum;
+
+ビュー定義のSELECT文をそのまま書く
+FROM句に直接ビュー定義のSELECT文を書く
+
+-------------------------------------------------------------------------
+SELECT Shohin_id, Shohin_mei, hanbai_tanka,
+(SELECT AVG(hanbai_tanka)FROM Shohin)
+AS avg_tanka
+FROM Shohin;
+
+サブクエリは使い捨てのビュー
+
+スカラサブクエリ
+必ず1行1列だけの戻り値を返す。
+
+スカラ書けるところにはどこにでも書ける。
+
+-------------------------------------------------------------------------
+
+
+
+
+
