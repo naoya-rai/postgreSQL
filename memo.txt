@@ -1,0 +1,61 @@
+やりたかったのはjdkのインストール
+
+
+参考：https://qiita.com/ponsuke0531/items/e036dfa4dd1e69086e13
+
+root権限で
+yum search java-1.8.0-openjdk　失敗
+yum list installed 失敗
+
+をしたが失敗した。
+
+
+
+■エラーメッセージ
+"Could not resolve host: mirrorlist.centos.org; 不明なエラー"
+
+
+--------------------------------------------------------------
+
+原因 : CentOSのネットワークにGATEWAYとDNSが設定されていないため、インターネットにつながっていないから、らしい
+対応 : インターネットに繋がるように設定を見直す。
+
+GATEWAYとDNSを設定する。
+yum updateでYumが繋がることを確認する。
+
+--------------------------------------------------------------
+
+VirtualBoxのCentOS7(CUI)でブリッジ接続でインターネットに繋がらない時の対応方法
+
+原因 : GATEWAYとDNSが設定されていないから。
+対応 : GATEWAYとDNSを設定する。
+
+１．network-scripts/ifcfg-enp0s3を編集する
+
+
+
+$ ls /etc/sysconfig/network-scripts/ifcfg-*
+/etc/sysconfig/network-scripts/ifcfg-enp0s3  /etc/sysconfig/network-scripts/ifcfg-lo
+$ sudo vi /etc/sysconfig/network-scripts/ifcfg-enp0s3 
+------▼設定ファイルの中身▼-----------------------
+BOOTPROTO=none
+DEVICE=enp0s3
+DNS=8.8.8.8 <<<<<<<<<<<<<< 追記
+GATEWAY=192.168.0.1 <<<<<<< 追記
+IPADDR=192.168.0.6
+NAME=enp0s3
+NETMASK=255.255.255.0
+ONBOOT=yes<<<<<<< 追記
+TYPE=Ethernet
+--------------------------
+
+
+
+GATEWAYがわからないから
+route -n コマンド　で調べてみた
+
+--------------------------------------------------------------
+
+２．NetworkManagerを動かないようにする
+
+ここまであってるかも謎なので一旦とめた。
